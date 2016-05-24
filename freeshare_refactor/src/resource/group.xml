@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- - This file is included by the struts.xml file as an example - of how 
+	to break up the configuration file into multiple files. -->
+<struts>
+	<package name="group" namespace="/group" extends="default">
+	    <action name="create">
+			<result name="success">/group/creategroup.jsp</result>
+		</action>
+		<action name="creategroup" class="com.free4lab.freeshare.action.group.CreateGroupAction">
+		 	<result type="redirect">/groups?tipstatus=3</result>
+		</action>
+		
+		<action name="searchgroups" class="com.free4lab.freeshare.action.GroupsAction" method="searchGroups">
+			<result name="success"></result>
+		</action>
+		
+		<!--  action name="getgroupid" class="com.free4lab.freeshare.action.group.PreGetGroup">
+			<result type="redirectAction">
+			 <param name="actionName">members</param>  
+       		 <param name="groupId">${groupId}</param>  
+			</result>
+		</action>-->
+		<!--  action name="getInviteMeGroups" class="com.free4lab.freeshare.action.GroupsAction"
+		method="getInviteMeGroups">
+			<result name="success">groups?type=2</result>
+		</action-->
+		
+		<action name="deletegroup" class="com.free4lab.freeshare.action.group.DeleteGroup">
+			<result type="redirect">groups?type=2</result>
+		</action>
+		
+		<action name="resource" class="com.free4lab.freeshare.action.group.ShowGroupResourceAction" method="getGroupHead">
+            <interceptor-ref name="identityStack"></interceptor-ref> 
+        	<result name="success">/group/group_resource.jsp</result>
+        	<result name="input">/group/group_apply.jsp</result>
+        	<!-- result name="redirect_news" type="redirect">/news</result> -->
+    	</action>
+    	
+    	<action name="ajaxresource" class="com.free4lab.freeshare.action.group.ShowGroupResourceAction" method="showGroupResource">
+        	<interceptor-ref name="identityStack"></interceptor-ref> 
+        	<result name="success" type="json"></result>
+    	</action>
+     
+		<action name="members" class="com.free4lab.freeshare.action.group.GetGroup">
+			<!-- param name="kind">0</param> -->
+			<result name="success">/group/group_members.jsp</result>
+		</action>
+		
+		<action name="getgroup" class="com.free4lab.freeshare.action.group.GetGroup">
+			<result name="success">/group/mygroup.jsp</result>
+			<result name="input">/error/group_not_find_error.jsp</result>
+		</action>
+		
+		<action name="preupdateinfo" class="com.free4lab.freeshare.action.group.UpdateGroupInfo"
+		method="prepare">
+			<result name="success">/group/updateGroupInfo.jsp</result>
+		</action>	
+		<action name="updategroupinfo" class="com.free4lab.freeshare.action.group.UpdateGroupInfo">
+			<!-- result name="success">/group/updateGroupInfo.jsp</result> -->
+			<!-- result type="redirect">/group/items?groupId=${groupId}</result> -->
+			<result type="json"></result> 
+		</action>
+		<action name="previewavatar" class="com.free4lab.freeshare.action.group.SaveAvatarAction" method="preview">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="uploadavatar" class="com.free4lab.freeshare.action.group.SaveAvatarAction" method="getAvatarsList">
+			<result name="success">/group/_newavatar.jsp</result>
+		</action>
+		<action name="changeavatar" class="com.free4lab.freeshare.action.group.SaveAvatarAction" method="getAvatarsList">
+			<result name="success">/group/_avatar.jsp</result>
+		</action>
+		<action name="deleteavatar" class="com.free4lab.freeshare.action.group.SaveAvatarAction" method="deleteOldAvatar">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="saveavatar" class="com.free4lab.freeshare.action.group.SaveAvatarAction">
+			<result name="success" type="stream">
+				<param name="contentType">text/html</param>
+            	<param name="inputName">inputStr</param>
+			</result>
+		</action>
+		
+		<!-- 企业管理员 新增配置 -->
+		<action name="groupadmin" class="com.free4lab.freeshare.action.group.administration.DepartmentAdminAction">
+			<!-- param name="kind">0</param> -->
+			<result name="success">/group/groupadmin.jsp</result>
+		</action>	
+		<action name="getenterpriseid" class="com.free4lab.freeshare.action.group.administration.DepartmentAdminAction">
+			<!-- param name="kind">0</param> -->
+			<result type="json"></result>
+		</action>
+		<action name="useradmin" class="com.free4lab.freeshare.action.group.administration.UserAdminAction">
+			<!-- param name="kind">0</param> -->
+			<result name="success">/basic/admin.jsp</result>
+		</action>
+		<action name="deletegroup2" class="com.free4lab.freeshare.action.group.DeleteGroup">
+			<result type="redirect">group/groupadmin?type=2</result>
+		</action>
+		<action name="creategroup2" class="com.free4lab.freeshare.action.group.CreateGroupAction" method="createGroup2">
+		 	<result type="redirect">group/groupadmin?type=2</result>
+		</action>
+		<action name="preupdateinfo2" class="com.free4lab.freeshare.action.group.UpdateGroupInfo"
+		method="prepare">
+			<result name="success">/group/updateDepartment.jsp</result>
+		</action>	
+		<action name="belongs" class="com.free4lab.freeshare.action.group.FindBelongsAction" method="findBelongGroups3">
+			<result name="success">/group/belongGroups.jsp</result>
+		</action>
+		<action name="deleteuser" class="com.free4lab.freeshare.action.group.DeleteUserAction">
+			<result name="success">/basic/admin.jsp</result>
+		</action>
+		<action name="deleteuser2" class="com.free4lab.freeshare.action.group.DeleteUserAction" method="deleteUserFromOneGroup">
+		 	<result type="redirect">useradmin</result> 
+		</action>
+		
+		<action name="departmentmembers" class="com.free4lab.freeshare.action.group.administration.GetMembersAction" >
+			<result name="success">../group/department_member.jsp</result>
+		</action>
+		
+		<action name="addnewcompanyuser" class="com.free4lab.freeshare.action.group.addNewCompanyUser" >
+			<result type="json"></result>
+		</action>
+		
+		<action name="adduser" class="com.free4lab.freeshare.action.group.addNewCompanyUser" method="allCompanyUsers" >
+			<result name="success">../group/addmanyUsers.jsp</result>
+		</action>
+		
+		<action name="addoneuser2many" class="com.free4lab.freeshare.action.group.addNewCompanyUser" method="allCompanyUsers" >
+			<result name="success">../group/addmanyGroups.jsp</result>
+		</action> 
+		
+		<action name="addtomanygroups" class="com.free4lab.freeshare.action.group.addNewCompanyUser" method="AddtoManyGroups" >
+			<result name="success">../group/addmanyGroups.jsp</result>
+		</action> 
+		
+		<action name="addmanyusers" class="com.free4lab.freeshare.action.group.addNewCompanyUser" method="AddManyUsers" >
+			<result name="success">../group/addmanyUsers.jsp</result>
+		</action>
+		
+		<action name="createenterprise" class="com.free4lab.freeshare.action.group.CreateEnterpriseAction"  >
+			<result type="redirect">useradmin</result> 
+		</action>
+		
+		<action name="preAddUser" class="com.free4lab.freeshare.action.group.addNewCompanyUser" method="allCompanyUsers" >
+			<result name="success">../basic/addUser.jsp</result>
+		</action>
+			
+	</package>
+</struts>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- - 
+This file is included by the struts.xml file. 
+
+Define edit action for item and list.
+-->
+<struts>
+	<package name="resource" namespace="/resource" extends="default">
+		<action name="preaddtogroup"
+			class="com.free4lab.freeshare.action.resource.PreAddtoGroupAction">
+			<result>../view/addtogroup.jsp</result>
+		</action>
+
+		<action name="addtomygroup"
+			class="com.free4lab.freeshare.action.resource.PreAddtoGroupAction" 
+			method="myGroup">
+			<result type="json"></result>
+		</action>
+		
+		<action name="addtogroups"
+			class="com.free4lab.freeshare.action.resource.AddtoGroupAction">
+			<result type="json"></result>
+		</action>
+		<action name="modifyblgroups"
+			class="com.free4lab.freeshare.action.resource.PublishAction"
+			method = "modifyGroup">
+			<result type="json"></result>
+		</action>
+		
+		
+		<action name="preaddtolist"
+			class="com.free4lab.freeshare.action.resource.PreAddtoListAction">
+			<interceptor-ref name="resourcePermissionStack"></interceptor-ref>
+			<result>../view/addtolist.jsp</result>
+		</action>
+		
+		<action name="addtomylist"
+			class="com.free4lab.freeshare.action.resource.PreAddtoListAction" 
+			method="myList">
+			<result type="json"></result>
+		</action>
+		
+		<action name="addtolistsearch"
+			class="com.free4lab.freeshare.action.resource.AddtoListSearchAction">
+			<result type="json"></result>
+		</action>
+
+		<action name="addtolists"
+			class="com.free4lab.freeshare.action.resource.AddtoListAction">
+			<interceptor-ref name="resourcePermissionStack"></interceptor-ref>
+			<result type="json"></result>
+		</action>
+		<action name="changeorder"
+			class="com.free4lab.freeshare.action.list.ChangeOrderAction">
+			<result type="json"></result>
+		</action>
+		<action name="delete"
+			class="com.free4lab.freeshare.action.resource.DeleteAction">
+			<interceptor-ref name="resourcePermissionStack"></interceptor-ref>
+			<result type="json"></result>
+		</action>
+		
+		<action name="deleteversion"
+			class="com.free4lab.freeshare.action.resource.DeleteAction"
+			method="deleteversion">
+			<interceptor-ref name="resourcePermissionStack"></interceptor-ref>
+			<result type="redirect">../resource?id=${id}</result>
+		</action>
+
+		<action name="preupdatelist"
+			class="com.free4lab.freeshare.action.resource.PreUpdateResourceAction"
+			method="pre">
+			<interceptor-ref name="resourcePermissionStack"></interceptor-ref>
+			<result>../view/update_list.jsp</result>
+		</action>
+
+		<action name="preupdateresource"
+			class="com.free4lab.freeshare.action.resource.PreUpdateResourceAction"
+			method="pre">
+			<interceptor-ref name="resourcePermissionStack"></interceptor-ref>
+			<result>../view/update_resource.jsp</result>
+		</action>
+		<action name="newdocversion"
+			class="com.free4lab.freeshare.action.resource.VersionAction"
+			method="pre">
+			<result>../view/newdocversion.jsp</result>
+		</action>
+		<action name="donewdocversion"
+			class="com.free4lab.freeshare.action.resource.VersionAction">
+			<result type="json"></result>
+		</action>
+		<action name="updateVersionDesc"
+			class="com.free4lab.freeshare.action.resource.VersionAction"
+			method = "updateDesc">
+			<result type="json"></result>
+		</action>
+		
+        <!--  TODO remove to other xml file  -->
+		<action name="delrelation"
+			class="com.free4lab.freeshare.action.list.DeleteRelationAction">
+			<interceptor-ref name="resourcePermissionStack"></interceptor-ref>
+			<result type="redirect">../resource?id=${id}</result>
+		</action>
+
+		<action name="comment"
+			class="com.free4lab.freeshare.action.comment.CommentAction">
+			<result type="json"></result>
+		</action>
+		<!-- qiepei -->
+		<action name="commentwithat"
+			class="com.free4lab.freeshare.action.comment.CommentWithAtAction">
+			<result type="json"></result>
+		</action>
+		<!--end-->
+		<action name="delcomment"
+			class="com.free4lab.freeshare.action.comment.CommentAction"
+			method="delCmt">
+			<result type="json"></result>
+		</action>
+		<action name="supportresource"
+			class="com.free4lab.freeshare.action.resource.ResourceRatingAction">
+			<result type = "json"></result>
+		</action>
+		<action name="collect"
+			class="com.free4lab.freeshare.action.CollectionsAction">
+			<result type="json"></result>
+		</action>
+		<action name="delcollect"
+			class="com.free4lab.freeshare.action.CollectionsAction"
+			method="deleteColl">
+			<result type="json"></result>
+		</action>
+		
+		<action name="getblgroups"
+			class="com.free4lab.freeshare.action.resource.FindBelongsAction"
+			method="findBelongGroups">
+			<result type="json"></result>
+		</action>
+		<action name="getblgroups2"
+			class="com.free4lab.freeshare.action.resource.FindBelongsAction"
+			method="findBelongGroups2">
+			<result type="json"></result>
+		</action>
+		<action name="getbllists"
+			class="com.free4lab.freeshare.action.resource.FindBelongsAction"
+			method="findBelongLists">
+			<result type="json"></result>
+		</action>
+		<action name="getbllabels"
+			class="com.free4lab.freeshare.action.resource.FindBelongsAction"
+			method="findBelongLabels">
+			<result type="json"></result>
+		</action>
+	</package>
+</struts>

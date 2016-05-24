@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- - This file is included by the struts.xml file as an example - of how 
+	to break up the configuration file into multiple files. -->
+<struts>
+	<package name="account" namespace="/" extends="default">
+		<!-- login from the freeAccount,is responsible for controlling the login 
+			if success then redirect to the news if the account is someone who first 
+			login the website, then use rediectAction to redirect to "profile" with its 
+			own parameters; if the account belongs no team, then use rediectAction to 
+			redirect to "error/needteams" with its own parameters; -->
+		<action name="login"
+			class="com.free4lab.freeshare.action.account.LoginAction">
+			<result type="redirect">${redirectUrl}</result>
+		</action>
+
+		<action name="getuseravatar"
+			class="com.free4lab.freeshare.action.account.GetUserInfoAction"
+			method="findUserAvatar">
+			<result type="json"></result>
+		</action>
+		
+		<action name="score"
+			class="com.free4lab.freeshare.action.account.UserScoreAction">
+			<result type="json" />
+		</action>
+		
+	</package>
+</struts>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="reco" namespace="/reco" extends="default">
+		<action name="regroups"
+			class="com.free4lab.freeshare.action.group.ReGroupAction" method="findAllRegroup">
+			<result name="success" type="json">
+			</result>
+		</action>
+		
+		<action name="recommend"
+			class="com.free4lab.freeshare.action.recommend.RecommendAction">
+			<result type="json">
+			</result>
+		</action>
+		
+		<action name="feedback"
+			class="com.free4lab.freeshare.action.recommend.RecommendAction"
+			method = "feedback">
+			<result type="json">
+			</result>
+		</action>
+		
+		<!-- 为新用户推荐所有标签 -->
+		<action name="newuser"
+			class="com.free4lab.freeshare.action.recommend.NewUserLabelsAction"
+			method="alllabels">
+			<result type="json"></result>
+		</action>
+		<action name="newusertags"
+			class="com.free4lab.freeshare.action.recommend.NewUserLabelsAction"
+			method="addLabels">
+			<result type="json"></result>
+		</action>
+		
+		
+	</package>
+</struts>

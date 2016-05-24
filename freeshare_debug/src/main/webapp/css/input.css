@@ -1,0 +1,19 @@
+/*
+创建群组使用
+*/
+.squareinputbig {
+    border: 1px solid #ADB9C2;
+    height: 24px;
+    padding: 0 5px;
+    width: 500px;
+}
+.editboxbig {
+    border: 1px solid #ADB9C2;
+    border-radius: 4px 4px 4px 4px;
+    color: #555555;
+    font-size: 12px;
+    height: 70px;
+    margin-top: 5px;
+    padding: 5px;
+    width: 500px;
+}

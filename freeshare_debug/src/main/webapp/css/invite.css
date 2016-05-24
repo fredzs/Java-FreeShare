@@ -1,0 +1,56 @@
+/*
+邀请成员使用
+*/
+.email {
+    float: right;
+    margin: 30px 40px;
+    width: 38%;
+}
+.mid
+{
+		margin-left:160px;
+		margin-right:600px;
+		padding-top:30px;
+		padding-left:50px;
+}
+.contentline {
+    border: 2px solid #A2D2FF;
+    border-style: none solid solid;
+    border-width: medium 2px 2px;
+    margin: 0 auto;
+}
+.lineIn {
+    padding: 5px 20px;
+}
+
+
+.rightX{
+	margin-right:7px;
+	float: right !important;
+	display: inline !important;
+}
+
+/* #inviteList {
+    background: none repeat scroll 0 0 #FAFAFA;
+    border: 1px solid #D5D9E0;
+    height: 120px;
+    margin-left:0px;
+	margin-right:20px;
+    //margin: 0 auto;
+    overflow: auto;
+    padding: 7px 5px;
+    width: 650px;
+} */
+#inviteList {
+   /*  background: none repeat scroll 0 0 #FAFAFA;
+    border: 1px solid #D5D9E0; */
+    height: 260px;
+    overflow: auto;
+    width: 770px;
+    /*padding: 7px 5px;
+     margin-left:0px;
+	margin-right:20px; 
+    margin: 0 auto;
+    
+    width: 650px;*/
+}

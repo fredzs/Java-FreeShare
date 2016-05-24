@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="members" namespace="/members" extends="default">
+		<action name=""
+			class="com.free4lab.freeshare.action.group.administration.GetMembersAction">
+			<result name="success">../group/mygroup.jsp</result>
+		</action>
+		<action name="invitation"
+			class="com.free4lab.freeshare.action.group.administration.AgreeInAction">
+			<result>../group/invitation.jsp</result>
+		</action>
+		
+	
+		
+		<action name="createbeforeinvite" class="com.free4lab.freeshare.action.group.CreateGroupAction">
+			<result type="redirectAction">
+				createinvite
+			</result>
+		</action>
+		<action name="createinvite" class="com.free4lab.freeshare.action.group.CreateGroupAction"
+			method="inviteMembers">
+
+			<result name="success">
+				../group/invitemember.jsp
+			</result>
+		</action>
+	 <!-- action name="invitefriends"
+			class="com.free4lab.freeshare.action.group.administration.InviteMembersAction" method = "inviteFriends" >
+
+			<result name="success">../group/invitemember.jsp</result>
+	  </action> -->
+	  <action name="invitemembers"
+			class="com.free4lab.freeshare.action.group.administration.InviteMembersAction"  >
+
+			<result name="success">../group/invitemember.jsp</result>
+	  </action>
+	   <action name="invitemyfriend"
+			class="com.free4lab.freeshare.action.group.administration.InviteMembersAction" method = "inviteFriends" >
+			<result type="json"></result>
+			
+	  </action>
+	  <action name="inviteothers"
+			class="com.free4lab.freeshare.action.group.administration.InviteMembersAction" method="inviteOthers">
+		
+			<result type="json"></result>
+	  </action>
+	   <!-- action name="invitemembers"
+			class="com.free4lab.freeshare.action.group.administration.InviteMembersAction">
+            <result name="success">../group/invitemember.jsp</result>
+			
+		</action> -->
+	
+		<action name="sendinvite"
+			class="com.free4lab.freeshare.action.group.administration.SendInviteAction">
+
+			<result type="redirect">../group/getgroup?groupId=${groupId}&amp;kind=2
+			</result>
+		</action>
+        <action name="sendinviteagain"
+			class="com.free4lab.freeshare.action.group.administration.SendInviteAction"
+			method="sendInviteAgain">
+			<result type="json"></result>
+		</action>
+		<action name="deleteinvitemem"
+			class="com.free4lab.freeshare.action.group.administration.AgreeInAction" method="deleteInviteMem">
+			<result type="json"></result>
+		</action>
+		<action name="getinvitation"
+			class="com.free4lab.freeshare.action.group.administration.AgreeInAction">
+			<result name="success">../group/invitation.jsp</result>
+		</action>
+
+		
+		<action name="preapply"
+			class="com.free4lab.freeshare.action.group.administration.ApplyAction"
+			method="prepare">
+			<result name="success">../group/apply_in.jsp</result>
+			<result name="freein" type="json"></result>
+		</action>
+		<action name="apply"
+			class="com.free4lab.freeshare.action.group.administration.ApplyAction">
+		<result type="redirect">../group/members?groupId=${groupId}</result> 
+	
+		</action>
+		<action name="ignore"
+			class="com.free4lab.freeshare.action.group.administration.DeleteMembersAction"
+			method="ignore">
+			<result type="json"></result>
+		</action>
+		
+		<action name="adminIgnore"
+			class="com.free4lab.freeshare.action.group.administration.DeleteMembersAction"
+			method="adminIgnore">
+			<result type="json"></result>
+		</action>
+
+		<action name="applyadd"
+			class="com.free4lab.freeshare.action.group.administration.AddMembersAction"
+			method="applyadd">
+			<result type="json"></result>
+		</action>
+
+		<action name="agree"
+			class="com.free4lab.freeshare.action.group.administration.AddMembersAction"
+			method="agree">
+			<result type="json"></result>
+		</action>
+
+		
+		<action name="setadmin" class="com.free4lab.freeshare.action.group.administration.AdminAction" method="setAdmin">
+
+			<result type="json"></result>
+		</action>
+
+		<action name="removeadmin"
+			class="com.free4lab.freeshare.action.group.administration.AdminAction" method="removeAdmin">
+			<result type="json"></result>
+		</action>
+
+		<action name="deletemembers"
+			class="com.free4lab.freeshare.action.group.administration.DeleteMembersAction">
+			<result type="json"></result>
+		</action>
+		<action name="quit"
+			class="com.free4lab.freeshare.action.group.administration.DeleteMembersAction" method="quitGroup">
+			<result type="json"></result>
+		</action>
+		
+	</package>
+</struts>

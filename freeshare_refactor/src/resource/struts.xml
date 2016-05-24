@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<!-- <constant name="struts.ui.templateDir" value="WEB-INF/template/" /> -->
+	<!-- 开发阶段，设置为开发模式 -->
+	<constant name="struts.devMode" value="true" />
+	<!--拦截没有后缀的URL,如/ /hello /user/ -->
+	<constant name="struts.action.extension" value="," />
+	<!-- 限制上传限制大小 ，改成20M -->
+	<constant name="struts.multipart.maxSize" value="62914560" />
+
+	<constant name="struts.action.excludePattern" value=".*uueditor/jsp/imageUp.jsp" />
+
+	<package name="default" extends="struts-default" abstract="true">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+		<interceptors>
+			<interceptor name="resourcePermission"
+				class="com.free4lab.freeshare.interceptor.BrowsePermissionInterceptor"></interceptor>
+			<interceptor name="groupsPermission"
+				class="com.free4lab.freeshare.interceptor.GroupsPermissionInterceptor"></interceptor>
+			<interceptor name="identity"
+				class="com.free4lab.freeshare.interceptor.IdentityInterceptor"></interceptor>
+			<interceptor name="json"
+				class="org.apache.struts2.json.JSONInterceptor" />
+
+			<interceptor-stack name="resourcePermissionStack">
+				<interceptor-ref name="resourcePermission"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+			
+			<interceptor-stack name="groupsPermissionStack">
+				<interceptor-ref name="groupsPermission"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+			<interceptor-stack name="identityStack">
+				<interceptor-ref name="identity"></interceptor-ref>
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+
+		<!-- 当没有对应action时，返回404页面 -->
+		<default-action-ref name="404" />
+
+		<default-class-ref class="com.opensymphony.xwork2.ActionSupport" />
+
+		<global-results>
+			<!-- 当数据验证错误时，struts2默认返回input结果，如果对应的action没有定义input，返回406页面 -->
+			<result name="input">/error/error.jsp</result>
+			<result name="error">/error/error.jsp</result>
+			<result name="notlogined" type="redirect">?redirectUrl=${redirectUrl}
+			</result>
+			<result name="permissionDenied">/error/permission_denied.jsp</result>
+			<result name="hasnogroups">/error/has_no_groups.jsp</result>
+			<result name="deleted">/error/item_deleted.jsp</result>
+			<result name="indexfailed">/error/indexfailed.jsp</result>
+			<result name="storerror">/error/indexfailed.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping result="error" exception="java.lang.Exception" />
+		</global-exception-mappings>
+
+		<action name="404">
+			<result>/error/404.jsp</result>
+		</action>
+
+	</package>
+
+	<!-- root目录 / -->
+	<include file="root.xml" />
+	<!-- account目录  -->
+	<include file="account.xml" />
+	<!-- upload目录 /upload -->
+	<include file="upload.xml" />
+	<!-- resource目录 /resource -->
+	<include file="resource.xml" />
+	<!-- group目录/group -->
+	<include file="group.xml" />
+	<!-- groupuser目录/groupuser -->
+	<include file="members.xml" />
+	<!-- reco目录/reco -->
+	<include file="reco.xml" />
+	<!-- verifyeidt目录/verify -->
+	<include file="verifyedit.xml" />
+	
+	<include file="regroup.xml" />
+</struts>

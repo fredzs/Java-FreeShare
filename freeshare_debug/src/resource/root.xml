@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<!-- - This file is included by the struts.xml file as an example - of how 
+	to break up the configuration file into multiple files. -->
+<struts>
+	<!-- 根目录 / -->
+	<package name="root" namespace="/" extends="default">
+
+		<action name="">
+			<result type="redirectAction">news</result>
+		</action>
+		<action name="search" class="com.free4lab.freeshare.action.SearchAction"
+			method="search">
+			<result name="success">basic/newsearch.jsp</result>
+			<result name="input">basic/newsearch.jsp</result>
+		</action>
+		<action name="searchTips" class="com.free4lab.freeshare.action.SearchAction"
+			method="searchTips">
+			<result name="success" type="json"></result>
+		</action>
+		<action name="news" class="com.free4lab.freeshare.action.NewsAction"
+			method="valAvatar">
+			<result name="success">basic/news.jsp</result>
+		</action>
+		<action name="ajaxnews" class="com.free4lab.freeshare.action.NewsAction">
+			<result name="success" type="json"></result>
+		</action>
+
+		<action name="items">
+			<result>/basic/items.jsp</result>
+		</action>
+		<action name="ajaxmine" class="com.free4lab.freeshare.action.ItemsAction">
+			<result name="success" type="json"></result>
+		</action>
+
+		<action name="drafts" class="com.free4lab.freeshare.action.DraftsAction">
+			<result>/basic/drafts.jsp</result>
+		</action>
+
+		<action name="comments"
+			class="com.free4lab.freeshare.action.comment.CommentObtainAction">
+			<result name="success">/basic/_comment.jsp</result>
+		</action>
+
+		<action name="collections" class="com.free4lab.freeshare.action.CollectionsAction"
+			method="collections">
+			<interceptor-ref name="groupsPermissionStack"></interceptor-ref>
+			<result name="success">/basic/collections.jsp</result>
+		</action>
+		<action name="labels" class="com.free4lab.freeshare.action.LabelsAction">
+			<result type="json"></result>
+		</action>
+		
+		<action name="item"
+			class="com.free4lab.freeshare.action.resource.BrowseAction">
+			<interceptor-ref name="itemPermissionStack"></interceptor-ref>
+			<param name="resourceType">0</param>
+			<result name="success">/basic/browse.jsp</result>
+		</action>
+
+		<action name="list"
+			class="com.free4lab.freeshare.action.resource.BrowseAction">
+			<interceptor-ref name="listPermissionStack"></interceptor-ref>
+			<param name="resourceType">-1</param>
+			<result name="success">/basic/browse.jsp</result>
+		</action>
+		<action name="draft"
+			class="com.free4lab.freeshare.action.resource.UpdateItemInfoAction"
+			method="draft">
+			<result>/view/update_item.jsp</result>
+		</action>
+
+		<!-- TODO 两个相同的获取群组的配置，待重构 -->
+		<action name="groups" class="com.free4lab.freeshare.action.GroupsAction">
+			<interceptor-ref name="groupsPermissionStack"></interceptor-ref>
+			<result name="success">/group/groups.jsp</result>
+		</action>
+
+		<action name="getmygroups"
+			class="com.free4lab.freeshare.action.resource.PreAddtoGroupAction"
+			method="myGroup">
+			<result name="success">/basic/_groupfilter.jsp</result>
+		</action>
+		
+		<action name="getmygroupsajax"
+			class="com.free4lab.freeshare.action.resource.PreAddtoGroupAction"
+			method="myGroup">
+			<result name="success" type="json"></result>
+		</action>
+
+		<action name="reloadindex"
+			class="com.free4lab.freeshare.rebuild.ReloadResourceIndex">
+			<result name="success" />
+		</action>
+	</package>
+</struts>

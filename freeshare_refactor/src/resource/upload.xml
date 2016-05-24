@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+          "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="upload" namespace="/upload" extends="default">
+	
+		<action name="uploadlist"
+		class = "com.free4lab.freeshare.action.resource.GetFormworkAction" method="setGroupForUpLoadTopic">
+			<result name="success">upload_list.jsp</result>
+		</action>
+		<action name="uploaditem" 
+			class = "com.free4lab.freeshare.action.resource.GetFormworkAction">
+			<result name="success">upload_resource.jsp</result>
+		</action>
+		<action name="uploadformwork" 
+			class = "com.free4lab.freeshare.action.resource.GetFormworkAction">
+			<result name="success">upload_formwork.jsp</result>
+		</action>
+		<action name="publish"
+			class="com.free4lab.freeshare.action.resource.PublishAction">
+			<result name="success" type="json"></result>
+		</action>
+
+		<action name="uploadtopic"
+		class = "com.free4lab.freeshare.action.resource.GetFormworkAction" method="setGroupForUpLoadTopic">
+			<result name="success">upload_topic.jsp</result>
+		</action>
+
+		<action name="publishtopic"
+			class="com.free4lab.freeshare.action.resource.UploadTopicResourceAction">
+			<result name="success" type="json"></result>
+		</action>
+
+		<action name="uploadfile"
+			class="com.free4lab.freeshare.action.resource.DocFileAction" method="uploadFile">
+			<result type="json"></result>
+		</action>
+		<action name="delUploadedfile"
+			class="com.free4lab.freeshare.action.resource.DocFileAction" method="delUploadedFile">
+			<result type="json"></result>
+		</action>
+		
+		<action name="savedraft"
+			class="com.free4lab.freeshare.action.resource.SaveDraftAction">
+			<result type="json"></result>
+		</action>
+		
+		<action name="formwork" 
+		 class="com.free4lab.freeshare.action.resource.UseFormworkAction">
+			<result type="json"></result>
+		</action>
+		
+		<action name="addlabels"
+			class="com.free4lab.freeshare.action.resource.AddLabelsAction">
+			<result type="json"></result>
+		</action>
+	</package>
+</struts>
